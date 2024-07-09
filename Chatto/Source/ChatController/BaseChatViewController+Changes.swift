@@ -99,7 +99,10 @@ extension BaseChatViewController {
     func updateVisibleCells(_ changes: CollectionChanges) {
         // Datasource should be already updated!
 
-        assert(self.visibleCellsAreValid(changes: changes), "Invalid visible cells. Don't call me")
+        guard self.visibleCellsAreValid(changes: changes) else {
+            print("Invalid visible cells. Don't call me")
+            return
+        }        
 
         let cellsToUpdate = updated(collection: self.visibleCellsFromCollectionViewApi(), withChanges: changes)
         self.visibleCells = cellsToUpdate
